@@ -4,7 +4,6 @@ import java.util.Properties;
 
 import com.hingebridge.devops.helpers.Encryption;
 import lombok.RequiredArgsConstructor;
-import org.bouncycastle.crypto.CryptoException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

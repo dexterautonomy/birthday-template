@@ -109,4 +109,11 @@ public class Encryption {
 
 		return decodedString;
 	}
+
+//	public static void main(String[] args) {
+//		Encryption enc = new Encryption("YHVH/4#W");
+//
+//		log.info("--->> Username: {}", enc.encryptStringEncoded("dexterautonomy@gmail.com"));
+//		log.info("--->> Password: {}", enc.encryptStringEncoded("wpiytmxehjgboeus"));
+//	}
 }
