@@ -9,15 +9,11 @@
             <div style="overflow: auto; margin-bottom: 30px;">
                 <div style="padding: 1px; margin: 15px 10px 0;">
                     <p style="">
-                        <img src="https://res.cloudinary.com/disl5oe7o/image/upload/v1601990229/display_images/food.jpg"
+                        <img th:src="${messageDTO.userDTO.imageLink}"
                              width="250" height="250" style="border-radius: 15px; float: left; margin-right: 15px;">
-                        <div style="text-align: justify;">
-                            We just need to verify your email address to complete your registration. We just need to verify your email address to complete your registration.
-                            We just need to verify your email address to complete your registration. We just need to verify your email address to complete your registration.
-                            We just need to verify your email address to complete your registration. We just need to verify your email address to complete your registration.
-                        </div>
+                        <div style="text-align: justify;" th:text="${messageDTO.message}"></div>
                         <div style="margin-top: 20px;">
-                            Sender: Sabinus Sabinus
+                            Sender: <span th:text="${messageDTO.userDTO.fullname}"></span>
                         </div>
                     </p>
                 </div>

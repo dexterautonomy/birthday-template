@@ -32,7 +32,7 @@ public class SendEmailService {
 		
 		try {
 			Context context = new Context();
-//			context.setVariable("user", user.getUserInfo());
+			context.setVariable("messageDTO", messageDTO);
 			
 			String template = "pages/birthday_template";
 			String mailSubject = messageSource.getMessage("message.subject", null, locale);

@@ -74,15 +74,20 @@ $(document).ready(function() {
 		if(image) {
 			if(image.size <= MAX_FILE_SIZE) {
 				if(validateImageFormat(image.name)) {
-					if(message.length <= MAX_MESSAGE_LENGTH) {
+					if(message.length === 0) {
+						resetKey = false;
+						let msg = "<h4>No Message To Send</h4><p>Kindly write a concise goodwill message.</p>"
+						$("#loader_div").removeClass("show_").addClass("hide_");
+						$("#info").removeClass("hide_").addClass("show_");
+						$("#info").html(msg);
+					} else if(message.length > 0 && message.length <= MAX_MESSAGE_LENGTH) {
 						if(fullname.match(/^([A-Za-z -']+)$/)) {
 							resetKey = true;
 							let imageURL = uploadToCloud(image);
 							// let imageURL = "uploadToCloud(image);" //dummy
 
 							let userDTO = {
-								'firstname': fullname,
-								'lastname': fullname,
+								'fullname': fullname,
 								'imageLink': imageURL
 							};
 
