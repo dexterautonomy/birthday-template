@@ -2,168 +2,84 @@ $(document).contextmenu(function(){
     return false;
 });
 
-$(document).ready(function(){
-	var table = "";
-
+$(document).ready(function() {
 	$(window).click(function(event) {
 		if ($(event.target).is($("#myModal")) && $("#myModal").is(":visible")) {
 	    	$("#myModal").removeClass("show").addClass("hide");
-	    	var table = "";
 	  	}
 	});
+
+	let cloudinaryDetails = {
+		uploadPreset: 'wpvsxpyx',
+		apiKey: '493351181962539',
+		cloudName: 'disl5oe7o'
+	};
 	
-	$('#search_button').click(function(e){
+	$('#submitMessage').click(function(e){
+		e.preventDefault();
 		processImpl();
 	});
-	
-	//Listen to enter keypress
-	$("#input_field").on('keyup', function (e) {
-	    if (e.key === 'Enter' || e.keyCode === 13) {
-	        processImpl();
-	    }
-	});
-	
-	function processImpl(){
-		var username = $('#input_field').val();
-		
-		if(username.trim() !== ""){
-			$('#display_results').html("");
-			$('#display_results').removeClass("ext").addClass("spinnerA");
-			$('#data_table_DIV').removeClass("show").addClass("hide");
-			$('#bookmark').removeClass("show").addClass("hide");
-			
-			$("#input_field").attr("disabled", "disabled");
-			$("#search_button").attr("disabled", "disabled");
-			
-			var queryUrl = "/github-repo-analytics/rest/v1/search?user="+username;
-			
-			$.ajax({
-	            url: queryUrl,
-	            type: "GET",
-	            timeout: 600000,
-	            success: function (data){
-	            	$("#input_field").removeAttr("disabled");
-					$("#search_button").removeAttr("disabled");
-					
-	                var dataSet = data.data;
-	                
-	                if(dataSet.length !== 0){
-	                	$('#display_results').html("");
-	                	$('#data_table_DIV').removeClass("hide").addClass("show");
-						$('#display_results').removeClass("spinnerA").addClass("ext");
-						$('#bookmark').removeClass("hide").addClass("show");
-	                
-	                	table = $('#example').DataTable( {
-	                		destroy: true,
-					        data: dataSet,
-					        columns: [
-					            { title: "Project" },
-					            { title: "Description" },
-					            { title: "Size" },
-					            { title: "Watchers" },
-					            { title: "Language" },
-					            { title: "Forks" },
-					            { title: "D. Branch" },
-					            { title: "Owner" }
-					        ]
-					    });
-					    
-					    $('#example tbody').on('click', 'tr', function () {
-					    	$("#myModal").removeClass("hide").addClass("show");
-					    	
-					    	$("#loader_dx").removeClass("hide").addClass("show");
-					    	$("#info").removeClass("show").addClass("hide").html("");
-					    	$("#konTENT_").removeClass("show").addClass("hide");
-					    	
-					        var tableRowData = table.row(this).data();
-					        var projectName = tableRowData[0];
-							var projectOwner = tableRowData[7];
-							
-					        var queryProjectUrl = "/github-repo-analytics/rest/v1/search-project?name="+projectName+"&owner="+projectOwner;
-					        
-					        $.ajax({
-					        	url: queryProjectUrl,
-					            type: "GET",
-					            timeout: 600000,
-					            success: function (data_){
-					            	$("#loader_dx").removeClass("show").addClass("hide");
-					            	$("#konTENT_").removeClass("hide").addClass("show");
-					            	
-					            	var projectDetails = data_.data;
-					            	var projectDTO = projectDetails.projectDTO;
-					            	var committers = projectDetails.committers;
 
-									$("#createdOn").html("<span class='dateClass'>Created On: "+ projectDTO.created_at +"</span>");
-									$("#updatedOn").html("<span class='dateClass'>Last Updated On: "+ projectDTO.updated_at +"</span>");
-					            	$("#prf_px").html("<img src='"+ projectDTO.owner.avatar_url +"' class='avatar' alt='github_avatar'/>");
-					            	$('#repo_x_nx').html("<h2>"+ projectDTO.name  +"</h2>");
-					            	$('#det_name_x').html(projectDTO.owner.login);
-					            	
-					            	if(projectDTO.description){
-					            		$('#desc_x').removeClass("hide").addClass("show").html("<div><div class='desc_jv'>Description</div>" + projectDTO.description + "</div><hr style='margin-top: 7px; margin-bottom: 7px'>");
-					            	}
-					            	else{
-					            		$('#desc_x').removeClass("show").addClass("hide").html("");
-					            	}
-					            	
-					            	if(committers.length !== 0){
-					            		$("#tbl_hd_sh").removeClass("hide").addClass("show");
-					            		$("#no_data_x").removeClass("show").addClass("hide").html("");
-					            	
-					            		var tableData = "";
-					            	
-						            	for(var count = 0; count < committers.length; count++){
-						            		tableData += "<tr><td>"+ committers[count].login  +"</td><td>"+ committers[count].contributions  +"</td><td>"+ committers[count].totalContributions  +"</td><td><img src='"+ committers[count].avatar_url +"' class='avatar2' alt='committer_github_avatar'/></td></tr>";
-						            	}
-						            	
-						            	$("#table_body").html(tableData);
-					            	}
-					            	else{
-					            		$("#tbl_hd_sh").removeClass("show").addClass("hide");
-					            		$("#no_data_x").removeClass("hide").addClass("show").html("No data for analytic purpose");
-					            	}
-					            },
-					            error: function(){
-									$("#loader_dx").removeClass("show").addClass("hide");
-									$("#info").removeClass("hide").addClass("show").addClass("info_x").html("Could not retrieve data...");
-					            }
-					        });
-					    });
-	                }
-	                else{
-	                	$('#data_table_DIV').removeClass("show").addClass("hide");
-	                	$('#bookmark').removeClass("show").addClass("hide");
-	                	$('#display_results').addClass("info_x").html("No data found...");
-						$('#display_results').removeClass("spinnerA").addClass("ext");
-						
-						$("#input_field").removeAttr("disabled");
-						$("#search_button").removeAttr("disabled");
-	                }
-	            },
-	            error: function(data){
-	            	$('#data_table_DIV').removeClass("show").addClass("hide");
-	            	$('#bookmark').removeClass("show").addClass("hide");
-	                $('#display_results').addClass("info_x").html("Could not retrieve data...");
-					$('#display_results').removeClass("spinnerA").addClass("ext");
-					
-					$("#input_field").removeAttr("disabled");
-					$("#search_button").removeAttr("disabled");
-	            }
-	        });
-		}
-		else{
-			$('#data_table_DIV').removeClass("show").addClass("hide");
-			$('#bookmark').removeClass("show").addClass("hide");
-			$('#display_results').addClass("info_x").html("Please enter username...");
-			$('#display_results').removeClass("spinnerA").addClass("ext");
-		}
+	function uploadToCloud(file) {
+		let imageUrl = null;
+		let request = new XMLHttpRequest();
+
+		let formData = new FormData();
+		formData.append('file', file);
+		formData.append('upload_preset', cloudinaryDetails.uploadPreset);
+		formData.append('tags', 'upload');
+
+		request.onreadystatechange = function() {
+			if (request.readyState === 4) {
+				imageUrl = JSON.parse(request.response).secure_url;
+			}
+		};
+		request.open("POST", `https://api.cloudinary.com/v1_1/${cloudinaryDetails.cloudName}/upload`, false);
+		request.send(formData);
+
+		return imageUrl;
 	}
 	
-	//Contrived for bookmarking
-	$("#bookmark_button").click(function() {
-    	alert('Press ' + (navigator.userAgent.toLowerCase().indexOf('mac') != - 1 ? 'Command/Cmd' : 'CTRL') + ' + D to bookmark this page.');
-	});
-	
-	
-	
+	function processImpl() {
+		const MAX_FILE_SIZE = 4000000;
+		let fullname = $('#fullname').val();
+		let message = $('#message').val();
+		let image = $('#image')[0].files[0];
+		const SEND_MESSAGE_ENDPOINT = "/api/v1/send";
+
+		if(image.size <= MAX_FILE_SIZE) {
+			let imageURL = uploadToCloud(image);
+
+			let userDTO = {
+				'firstname': fullname,
+				'lastname': fullname,
+				'imageLink': imageURL
+			};
+
+			let messageDTO = {
+				'message': message,
+				'userDTO': userDTO
+			};
+
+			$.ajax({
+				type: "POST",
+				url: SEND_MESSAGE_ENDPOINT,
+				contentType: "application/json; charset=utf-8",
+				// dataType: 'json',
+				processData: false,
+				data: JSON.stringify(messageDTO),
+				cache: false,
+				timeout: 600000,
+				success: function (data) {
+					console.log(data);
+				},
+				error: function(data) {
+					console.log("--->> Payload", messageDTO);
+					console.log("--->> Error", data);
+				}
+			});
+		} else {
+
+		}
+	}
 });
