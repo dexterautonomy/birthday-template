@@ -10,9 +10,11 @@ body {
 	text-align: center;
 	margin-top: 25px;
 	font-family: Comic Sans MS;
+	color: darkblue;
 }
 
 .nameHeader {
+	color: darkblue;
 	font-family: Comic Sans MS;
 	text-align: center; margin-top: 20px;
 }
@@ -43,8 +45,7 @@ body {
 }
 
 label {
-	font-weight: bold;
-	font-family: Comic Sans MS;
+	color: #888888;
 }
 
 

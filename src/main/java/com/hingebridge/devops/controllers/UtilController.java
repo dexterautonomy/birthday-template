@@ -19,7 +19,6 @@ public class UtilController {
     public Mono<ResponseEntity<String>> send(@RequestBody MessageDTO messageDTO) {
         log.info("--->> MessageDTO: {}", messageDTO);
         sendEmailService.sendBithdayMail(messageDTO);
-//        Thread.sleep(5000);
         return Mono.just(ResponseEntity.ok("Message Sent"));
     }
 }
