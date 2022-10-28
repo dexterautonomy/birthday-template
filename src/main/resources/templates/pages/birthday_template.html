@@ -3,17 +3,28 @@
     <head>
     	<title>Birthday Message</title>
     </head>
-    <body>
-        <div style="width: 85%; margin: 16px auto 0; border: 1px solid rgba(0,0,0,0.2); height: auto; border: 1px solid grey; border-radius: 10px;">
-            <div style="padding: 15px 5px 0px 10px;text-align: center; font-size: 25px; font-weight: bold;">Happy Birthday Mama</div>
+    <body style="">
+        <div style="width: 85%; margin: 16px auto 0; border: 1px solid rgba(0,0,0,0.2); height: auto; border: 1px solid lightgray; border-radius: 10px;
+background-image: url('https://res.cloudinary.com/disl5oe7o/image/upload/v1666989577/eygvxedpkwiczm5qbxee.webp'); background-size: cover;">
+            <div style="padding: 15px 5px 0px 10px;text-align: center; font-size: 25px; font-weight: bold; font-family: 'Comic Sans MS'; color: goldenrod;
+text-decoration: underline;">
+                Happy Birthday Olori
+            </div>
             <div style="overflow: auto; margin-bottom: 30px;">
                 <div style="padding: 1px; margin: 15px 10px 0;">
-                    <p style="">
-                        <img th:src="${messageDTO.userDTO.imageLink}"
-                             width="250" height="250" style="border-radius: 15px; float: left; margin-right: 15px;">
-                        <div style="text-align: justify;" th:text="${messageDTO.message}"></div>
-                        <div style="margin-top: 20px;">
-                            Sender: <span th:text="${messageDTO.userDTO.fullname}"></span>
+                    <div style="">
+                        <div>
+                            <img th:src="${messageDTO.userDTO.imageLink}" src="https://res.cloudinary.com/disl5oe7o/image/upload/v1619510299/gopasnuuyzupcralqxjo.jpg"
+                                 width="250" height="250" style="border-radius: 50%; float: left; margin-right: 15px; border: 1px solid lightgray; padding: 4px;">
+                        </div>
+
+                        <div style="text-align: justify; color: goldenrod; font-weight: bold; font-size: 20px; font-family: 'Bradley Hand ITC'" th:text="${messageDTO.message}">
+                            Happy birthday! Happy birthday! Happy birthday! Happy birthday! Happy birthday! Happy birthday! Happy birthday! Happy birthday! Happy birthday! Happy birthday!
+                            Happy birthday! Happy birthday!Happy birthday! Happy birthday!Happy birthday! Happy birthday!Happy birthday! Happy birthday!Happy birthday! Happy birthday!Happy birthday! Happy birthday!
+                            Happy birthday! Happy birthday!Happy birthday! Happy birthday!Happy birthday! Happy birthday!Happy birthday! Happy birthday!
+                        </div>
+                        <div style="font-size: 25px; margin-top: 20px; float: right; font-family: 'Arial Black'; color: #fefefe; text-decoration: underline;">
+                            <span th:text="${messageDTO.userDTO.fullname}">Queen Fab</span>
                         </div>
                     </p>
                 </div>

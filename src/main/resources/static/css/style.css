@@ -2,6 +2,19 @@ body {
 	padding: 0px !important;
 	margin: 0px !important;
 	background-color: aliceblue !important;
+	background-image: url("../images/bkimg (1).webp");
+	background-size: cover;
+}
+
+.headerOne {
+	text-align: center;
+	margin-top: 25px;
+	font-family: Comic Sans MS;
+}
+
+.nameHeader {
+	font-family: Comic Sans MS;
+	text-align: center; margin-top: 20px;
 }
 
 .img-div {
@@ -29,7 +42,10 @@ body {
 	margin: 0 auto;
 }
 
-
+label {
+	font-weight: bold;
+	font-family: Comic Sans MS;
+}
 
 
 
@@ -55,12 +71,12 @@ body {
 }
 
 .show_{
-	display: block;
-	-webkit-animation: fadein 1s;
-	-moz-animation: fadein 1s;
-	-ms-animation: fadein 1s;
-	-o-animation: fadein 1s;
-	animation: fadein 1s;
+	display: block; !important;
+	-webkit-animation: fadein 1s !important;
+	-moz-animation: fadein 1s !important;
+	-ms-animation: fadein 1s !important;
+	-o-animation: fadein 1s !important;
+	animation: fadein 1s !important;
 }
 
 .hide_{
@@ -88,10 +104,10 @@ body {
 	border: 1px solid #888;
 	width: 60% !important;
 	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-	-webkit-animation-name: animatetop;
-	-webkit-animation-duration: 0.4s;
-	animation-name: animatetop;
-	animation-duration: 0.4s
+	-webkit-animation-name: animatetop !important;
+	-webkit-animation-duration: 0.4s !important;
+	animation-name: animatetop !important;
+	animation-duration: 0.4s !important;
 }
 
 @-webkit-keyframes animatetop {

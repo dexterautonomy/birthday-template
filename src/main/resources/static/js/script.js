@@ -4,61 +4,16 @@ $(document).contextmenu(function(){
 
 $(document).ready(function() {
 	let resetKey = false;
-
-	$(window).click(function(event) {
-		if ($(event.target).is($("#myModal_")) && $("#myModal_").is(":visible")) {
-			if(resetKey) {
-				reset();
-			}
-
-			$("#info").html("");
-			$("#info").removeClass("show_").addClass("hide_");
-	    	$("#myModal_").removeClass("show_").addClass("hide_");
-	  	}
-	});
-
 	let cloudinaryDetails = {
 		uploadPreset: 'wpvsxpyx',
 		apiKey: '493351181962539',
 		cloudName: 'disl5oe7o'
 	};
 	
-	$('#submitMessage').click(function(e){
+	$('#submitMessage').click(function(e) {
 		e.preventDefault();
 		processImpl();
 	});
-
-	function reset() {
-		$("#info").html("");
-		$('#message').val("");
-		$('#fullname').val("");
-		$($('#image')[0]).val("");
-	}
-
-	function uploadToCloud(file) {
-		let imageUrl = null;
-		let request = new XMLHttpRequest();
-
-		let formData = new FormData();
-		formData.append('file', file);
-		formData.append('upload_preset', cloudinaryDetails.uploadPreset);
-		formData.append('tags', 'upload');
-
-		request.onreadystatechange = function() {
-			if (request.readyState === 4) {
-				imageUrl = JSON.parse(request.response).secure_url;
-			}
-		};
-		request.open("POST", `https://api.cloudinary.com/v1_1/${cloudinaryDetails.cloudName}/upload`, false);
-		request.send(formData);
-
-		return imageUrl;
-	}
-
-	function validateImageFormat(fileName) {
-		return fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".jpeg")
-			|| fileName.endsWith(".JPG") || fileName.endsWith(".PNG") || fileName.endsWith(".JPEG")
-	}
 	
 	function processImpl() {
 		$("#myModal_").removeClass("hide_").addClass("show_");
@@ -153,4 +108,49 @@ $(document).ready(function() {
 			$("#info").html(msg);
 		}
 	}
+
+	function reset() {
+		$("#info").html("");
+		$('#message').val("");
+		$('#fullname').val("");
+		$($('#image')[0]).val("");
+	}
+
+	function validateImageFormat(fileName) {
+		return fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".jpeg")
+			|| fileName.endsWith(".JPG") || fileName.endsWith(".PNG") || fileName.endsWith(".JPEG")
+			|| fileName.endsWith(".webp")
+	}
+
+	function uploadToCloud(file) {
+		let imageUrl = null;
+		let request = new XMLHttpRequest();
+
+		let formData = new FormData();
+		formData.append('file', file);
+		formData.append('upload_preset', cloudinaryDetails.uploadPreset);
+		formData.append('tags', 'upload');
+
+		request.onreadystatechange = function() {
+			if (request.readyState === 4) {
+				imageUrl = JSON.parse(request.response).secure_url;
+			}
+		};
+		request.open("POST", `https://api.cloudinary.com/v1_1/${cloudinaryDetails.cloudName}/upload`, false);
+		request.send(formData);
+
+		return imageUrl;
+	}
+
+	$(window).click(function(event) {
+		if ($(event.target).is($("#myModal_")) && $("#myModal_").is(":visible")) {
+			if(resetKey) {
+				reset();
+			}
+
+			$("#info").html("");
+			$("#info").removeClass("show_").addClass("hide_");
+			$("#myModal_").removeClass("show_").addClass("hide_");
+		}
+	});
 });
