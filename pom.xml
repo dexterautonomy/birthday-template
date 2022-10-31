@@ -108,6 +108,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>birthday</finalName>
 	</build>
 
 </project>

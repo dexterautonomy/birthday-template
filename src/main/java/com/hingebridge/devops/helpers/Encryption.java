@@ -113,7 +113,7 @@ public class Encryption {
 //	public static void main(String[] args) {
 //		Encryption enc = new Encryption("YHVH/4#W");
 //
-//		log.info("--->> Username: {}", enc.encryptStringEncoded("8c94d7c0ce2ee2"));
-//		log.info("--->> Password: {}", enc.encryptStringEncoded("8155f0b0ed72a0"));
+//		log.info("--->> Username: {}", enc.encryptStringEncoded("3e8fb376788800"));
+//		log.info("--->> Password: {}", enc.encryptStringEncoded("fa048447c4d454"));
 //	}
 }
